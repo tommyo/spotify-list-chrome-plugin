@@ -1,12 +1,12 @@
 {
     "manifest_version": 3,
     "action": {
-        "default_popup": "index.html",
+        "default_popup": "popup.html",
         "default_icon": {
             "16": "icon16.png",
-            "32": "icon32.png",
-            "48": "icon48.png",
-            "128": "icon128.png"
+        "32": "icon32.png",
+        "48": "icon48.png",
+        "128": "icon128.png"
         }
     },
     "icons": {
@@ -15,8 +15,8 @@
         "48": "icon48.png",
         "128": "icon128.png"
     },
-    "permissions": ["activeTab"],
+    "permissions": ["activeTab", "declarativeContent"],
     "background": {
-        "service_worker": "src/background.ts"
+        "service_worker": "background.ts"
     }
 }
