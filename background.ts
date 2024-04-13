@@ -4,19 +4,13 @@ chrome.runtime.onInstalled.addListener(() => {
   // disable by default
   chrome.action.disable();
 
-  chrome.declarativeContent.onPageChanged.removeRules(undefined, () => {
-    const onSpotify = {
-      conditions: [
-        new chrome.declarativeContent.PageStateMatcher({
-          pageUrl: {
-            hostEquals: "open.spotify.com",
-            schemes: ["https"],
-            pathPrefix: "/playlist/",
-          },
-        }),
-      ],
-      actions: [new chrome.declarativeContent.ShowAction({})],
-    };
-    chrome.declarativeContent.onPageChanged.addRules([ onSpotify ]);
-  });
+  chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: true });
+});
+
+chrome.tabs.onUpdated.addListener((tabId, _, tab) => {
+  if (tab.url && tab.url === "https://open.spotify.com/") {
+    console.log({ tabId, tab });
+    chrome.sidePanel.setOptions({ tabId, path: "sidebar.html" });
+    chrome.action.enable(tabId);
+  }
 });

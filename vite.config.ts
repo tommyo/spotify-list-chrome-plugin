@@ -6,7 +6,7 @@ import manifest from './manifest.json';
 import { name, version, description } from './package.json';
 
 export default defineConfig({
-    publicDir: 'icons',
+    publicDir: 'icons',   
     plugins: [
         crx({ manifest: { ...manifest, name, version, description } }),
     ],
